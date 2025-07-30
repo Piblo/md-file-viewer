@@ -54,7 +54,7 @@ function onFileChange(event: Event) {
   <input ref="inputRef" hidden type="file" accept=".md" @change="onFileChange" />
 </template>
 
-<style>
+<style scoped>
 .dropzone {
   background-color: transparent;
   border: 2px dashed var(--color-neutral-dark);

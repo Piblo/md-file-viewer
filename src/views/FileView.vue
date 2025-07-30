@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import MarkdownViewer from '@/components/MarkdownViewer.vue'
-import { getFile } from '@/lib/FileService'
 import { useRoute } from 'vue-router'
+import { useFileStore } from '@/stores/files'
 
 const route = useRoute()
-const file = getFile(route.params.id as string)
+const fileStore = useFileStore()
+const file = fileStore.getFile(route.params.id as string)
 </script>
 
 <template>

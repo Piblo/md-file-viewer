@@ -1,28 +1,29 @@
 import type { FileModel } from '@/model/FileModel'
 
-export async function addFile(file: File) {
-  const fileText = await file.text()
-
-  const fileModel: FileModel = {
-    dateUploaded: new Date(),
-    id: crypto.randomUUID(),
-    markdown: fileText,
-    name: file.name,
-  }
-
-  localStorage.setItem(`file:${fileModel.id}`, JSON.stringify(fileModel))
-
-  return fileModel
-}
-
-export function getFile(id: string) {
-  const fileJson = localStorage.getItem(`file:${id}`)
-  if (!fileJson) {
-    throw new FileNotFoundError(`Could not find file with id ${id}`)
-  }
-
-  const file: FileModel = JSON.parse(fileJson)
+export async function addFile(file: FileModel) {
+  localStorage.setItem(`file:${file.id}`, JSON.stringify(file))
   return file
 }
 
-class FileNotFoundError extends Error {}
+export function getFiles() {
+  const files: FileModel[] = []
+  for (const key in localStorage) {
+    if (key.startsWith('file:')) {
+      const fileJson = localStorage.getItem(key)
+      if (fileJson) {
+        files.push(JSON.parse(fileJson))
+      }
+    }
+  }
+
+  return files
+}
+
+export async function mapToFileModel(file: File): Promise<FileModel> {
+  return {
+    dateUploaded: new Date(),
+    id: crypto.randomUUID(),
+    markdown: await file.text(),
+    name: file.name,
+  }
+}

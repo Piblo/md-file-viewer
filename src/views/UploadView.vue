@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import DropZone from '@/components/DropZone.vue'
-import { addFile } from '@/lib/FileService'
+import { mapToFileModel } from '@/lib/FileService'
+import { useFileStore } from '@/stores/files'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const fileStore = useFileStore()
 
 async function onFileSelected(file: File) {
-  const fileModel = await addFile(file)
+  const fileModel = await mapToFileModel(file)
+  fileStore.addFile(fileModel)
   router.push(`/file/${fileModel.id}`)
 }
 </script>

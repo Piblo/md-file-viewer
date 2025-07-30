@@ -4,9 +4,11 @@
   --color-primary-dark: #c2410c;
   --color-primary-light: #fdba74;
   --color-text: #171717;
+  --color-text-muted: #808080;
   --color-background: #ffffff;
   --color-neutral: #737373;
   --color-neutral-dark: #404040;
+  --color-neutral-darker: #2b2b2b;
   --color-neutral-light: #d4d4d4;
 
   --spacing-1: 0.25rem;
