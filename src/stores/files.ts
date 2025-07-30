@@ -18,6 +18,7 @@ export const useFileStore = defineStore('file', {
 
       return file
     },
+    getFiles: (state) => () => state.files,
   },
   actions: {
     addFile(file: FileModel) {
