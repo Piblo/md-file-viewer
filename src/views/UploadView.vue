@@ -2,6 +2,7 @@
 import DropZone from '@/components/DropZone.vue'
 import { mapToFileModel } from '@/lib/FileService'
 import { useFileStore } from '@/stores/files'
+import { InfoIcon } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -15,5 +16,20 @@ async function onFileSelected(file: File) {
 </script>
 
 <template>
-  <DropZone class="dropzone" @file-selected="onFileSelected" />
+  <DropZone @file-selected="onFileSelected">
+    <div class="info-container">
+      <InfoIcon width="1rem" height="1rem" />
+      <p>Uploaded files are kept in local storage</p>
+    </div>
+  </DropZone>
 </template>
+
+<style scoped>
+.info-container {
+  margin-top: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  color: var(--color-text-muted);
+}
+</style>

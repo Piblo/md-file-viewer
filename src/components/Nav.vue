@@ -13,7 +13,7 @@ const files = useFileStore()
     <NavLink to="/" class="nav-item">
       <FileUpIcon width="1rem" height="1rem" class="icon" /> Upload file
     </NavLink>
-    <div v-if="files.getFiles().length > 0">
+    <div v-show="files.getFiles().length > 0">
       <h2 class="nav-item nav-label">Files</h2>
       <TransitionGroup name="file-item" tag="ul">
         <li v-for="file in files.$state.files" :key="file.id">
@@ -52,7 +52,6 @@ ul {
 .nav-label {
   color: var(--color-text-muted);
   font-size: 0.85rem;
-  padding-bottom: 0;
 }
 
 .icon {

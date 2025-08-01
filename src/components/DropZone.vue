@@ -50,6 +50,7 @@ function onFileChange(event: Event) {
       >Drop your file here,
       <Button variant="link" @click="onClick">or click to browse</Button></span
     >
+    <slot />
   </div>
   <input ref="inputRef" hidden type="file" accept=".md" @change="onFileChange" />
 </template>
