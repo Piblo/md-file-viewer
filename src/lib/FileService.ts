@@ -27,3 +27,7 @@ export async function mapToFileModel(file: File): Promise<FileModel> {
     name: file.name,
   }
 }
+
+export function deleteFile(id: string) {
+  localStorage.removeItem(`file:${id}`)
+}

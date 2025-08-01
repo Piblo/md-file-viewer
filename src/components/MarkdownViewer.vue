@@ -6,8 +6,6 @@ const props = defineProps<{
   markdown: string
 }>()
 
-console.log('MarkdownViewer props:', props.markdown)
-
 const md = markdownit({
   linkify: true,
 })

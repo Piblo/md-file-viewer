@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { useFileStore } from '@/stores/files'
-import { FileUpIcon } from 'lucide-vue-next'
+import { FileUpIcon, XIcon } from 'lucide-vue-next'
 import { formatDate } from 'date-fns'
 import NavLink from './NavLink.vue'
 
@@ -18,7 +18,12 @@ const files = useFileStore()
       <TransitionGroup name="file-item" tag="ul">
         <li v-for="file in files.$state.files" :key="file.id">
           <NavLink :to="`/file/${file.id}`" class="nav-item column">
-            <h3 class="file-link-header">{{ file.name }}</h3>
+            <div class="header">
+              <h3 class="file-link-header">{{ file.name }}</h3>
+              <button class="delete-button" @click="files.deleteFile(file.id)">
+                <XIcon width="16px" height="16px" color="currentColor" />
+              </button>
+            </div>
             <small>{{ formatDate(file.dateUploaded, 'dd/MM/yyyy') }}</small>
           </NavLink>
         </li>
@@ -75,5 +80,18 @@ ul {
 .file-item-leave-to {
   opacity: 0;
   transform: translateX(-100%);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: currentColor;
 }
 </style>
