@@ -1,15 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { useFileStore } from '@/stores/files'
-import { FileUpIcon, XIcon } from 'lucide-vue-next'
-import { formatDate } from 'date-fns'
+import { FileUpIcon } from 'lucide-vue-next'
 import NavLink from './NavLink.vue'
+import FileNavItem from './FileNavItem.vue'
 
 const files = useFileStore()
 </script>
 
 <template>
   <nav class="container">
+    <h1 class="nav-item nav-title">Markdown File Viewer</h1>
     <NavLink to="/" class="nav-item">
       <FileUpIcon width="1rem" height="1rem" class="icon" /> Upload file
     </NavLink>
@@ -17,14 +18,8 @@ const files = useFileStore()
       <h2 class="nav-item nav-label">Files</h2>
       <TransitionGroup name="file-item" tag="ul">
         <li v-for="file in files.$state.files" :key="file.id">
-          <NavLink :to="`/file/${file.id}`" class="nav-item column">
-            <div class="header">
-              <h3 class="file-link-header">{{ file.name }}</h3>
-              <button class="delete-button" @click="files.deleteFile(file.id)">
-                <XIcon width="16px" height="16px" color="currentColor" />
-              </button>
-            </div>
-            <small>{{ formatDate(file.dateUploaded, 'dd/MM/yyyy') }}</small>
+          <NavLink :to="`/file/${file.id}`" class="nav-item column file-nav-link">
+            <FileNavItem :file />
           </NavLink>
         </li>
       </TransitionGroup>
@@ -42,6 +37,10 @@ const files = useFileStore()
 .nav-item {
   margin: 0 var(--spacing-4);
   padding: var(--spacing-2);
+}
+
+.nav-title {
+  margin-bottom: var(--spacing-4);
 }
 
 ul {
@@ -66,8 +65,8 @@ ul {
   align-items: start;
 }
 
-.file-link-header {
-  font-size: 1rem;
+.file-nav-link {
+  padding: 0;
 }
 
 .file-item-enter-active,
@@ -79,18 +78,5 @@ ul {
 .file-item-leave-to {
   opacity: 0;
   transform: translateX(-100%);
-}
-
-.header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  width: 100%;
-}
-
-.delete-button {
-  background: none;
-  border: none;
-  color: currentColor;
 }
 </style>

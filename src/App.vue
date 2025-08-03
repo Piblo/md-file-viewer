@@ -7,7 +7,6 @@ import Nav from './components/Nav.vue'
   <div class="layout">
     <Nav />
     <div class="content">
-      <h1>Markdown file viewer</h1>
       <RouterView />
     </div>
   </div>

@@ -2,7 +2,7 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    variant: 'default' | 'link'
+    variant: 'default' | 'link' | 'unstyled'
   }>(),
   {
     variant: 'default',
@@ -49,5 +49,13 @@ button {
   &:hover {
     color: var(--color-primary-dark);
   }
+}
+
+.unstyled {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  cursor: pointer;
 }
 </style>
