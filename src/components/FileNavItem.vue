@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useFileStore } from '@/stores/files'
 import { formatDate } from 'date-fns'
-import { XIcon } from 'lucide-vue-next'
+import { ChevronRightIcon, XIcon } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 import Button from './Button.vue'
 
@@ -33,7 +33,8 @@ const trackOffset = computed(() => {
         <div class="header">
           <h3 class="file-link-header">{{ file.name }}</h3>
           <Button variant="unstyled" class="delete-button" @click="showActions = !showActions">
-            <XIcon width="16px" height="16px" color="currentColor" />
+            <XIcon width="16px" height="16px" color="currentColor" v-if="!showActions" />
+            <ChevronRightIcon width="16px" height="16px" color="currentColor" v-else />
           </Button>
         </div>
         <small>{{ formatDate(file.dateUploaded, 'dd/MM/yyyy') }}</small>
