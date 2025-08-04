@@ -26,7 +26,10 @@ const content = ref(md.render(props.markdown))
     margin-bottom: var(--spacing-4);
   }
 
-  h2,
+  h2 {
+    margin-bottom: var(--spacing-3);
+  }
+
   h3,
   h4,
   h5,
@@ -34,6 +37,8 @@ const content = ref(md.render(props.markdown))
     margin-bottom: var(--spacing-2);
   }
 
+  ul,
+  ol,
   p {
     margin-bottom: var(--spacing-2);
   }

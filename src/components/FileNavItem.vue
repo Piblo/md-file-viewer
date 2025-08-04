@@ -40,7 +40,13 @@ const trackOffset = computed(() => {
         <small>{{ formatDate(file.dateUploaded, 'dd/MM/yyyy') }}</small>
       </div>
       <div ref="actionsContainerRef" class="actions-container">
-        <Button variant="unstyled" @click="fileStore.deleteFile(file.id)">Delete</Button>
+        <Button
+          variant="unstyled"
+          @click="fileStore.deleteFile(file.id)"
+          :tabindex="showActions ? 0 : -1"
+        >
+          Delete</Button
+        >
       </div>
     </div>
   </div>
