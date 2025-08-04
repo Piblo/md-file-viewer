@@ -3,10 +3,6 @@ import { ref } from 'vue'
 import Button from './Button.vue'
 import { FileUp } from 'lucide-vue-next'
 
-const props = defineProps<{
-  class?: string
-}>()
-
 const emit = defineEmits<{
   fileSelected: [file: File]
 }>()
@@ -38,21 +34,23 @@ function onFileChange(event: Event) {
 </script>
 
 <template>
-  <div
-    class="dropzone"
-    :class="[props.class, { dragOver: isDraggingOver }]"
-    v-on:dragover.prevent="() => (isDraggingOver = true)"
-    v-on:dragleave="() => (isDraggingOver = false)"
-    v-on:drop.prevent="onFileDrop"
-  >
-    <FileUp class="icon" />
-    <span
-      >Drop your file here,
-      <Button variant="link" @click="onClick">or click to browse</Button></span
+  <div>
+    <div
+      class="dropzone"
+      :class="[{ dragOver: isDraggingOver }]"
+      v-on:dragover.prevent="() => (isDraggingOver = true)"
+      v-on:dragleave="() => (isDraggingOver = false)"
+      v-on:drop.prevent="onFileDrop"
     >
-    <slot />
+      <FileUp class="icon" />
+      <span
+        >Drop your file here,
+        <Button variant="link" @click="onClick">or click to browse</Button></span
+      >
+      <slot />
+    </div>
+    <input ref="inputRef" hidden type="file" accept=".md" @change="onFileChange" />
   </div>
-  <input ref="inputRef" hidden type="file" accept=".md" @change="onFileChange" />
 </template>
 
 <style scoped>
@@ -67,6 +65,8 @@ function onFileChange(event: Event) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: var(--spacing-4);
+  height: 100%;
 }
 
 .dragOver {

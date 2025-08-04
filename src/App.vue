@@ -12,7 +12,7 @@ import Nav from './components/Nav.vue'
   </div>
 </template>
 
-<style>
+<style scoped>
 .dropzone {
   height: 30vh;
 }
@@ -27,6 +27,6 @@ h1 {
 }
 
 .content {
-  padding: var(--spacing-4) var(--spacing-7);
+  padding: var(--spacing-6) var(--spacing-7);
 }
 </style>

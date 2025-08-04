@@ -32,6 +32,8 @@ const files = useFileStore()
   border-right: 1px solid var(--color-neutral-dark);
   height: 100dvh;
   padding: var(--spacing-4) 0;
+  position: sticky;
+  inset: 0;
 }
 
 .nav-item {
