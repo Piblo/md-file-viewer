@@ -10,7 +10,7 @@ const files = useFileStore()
 
 <template>
   <nav class="container">
-    <h1 class="nav-item nav-title">Markdown File Viewer</h1>
+    <h1 class="nav-item nav-title"><code>.md</code> File Viewer</h1>
     <NavLink to="/" class="nav-item">
       <FileUpIcon width="1rem" height="1rem" class="icon" /> Upload file
     </NavLink>
@@ -80,5 +80,12 @@ ul {
 .file-item-leave-to {
   opacity: 0;
   transform: translateX(-100%);
+}
+
+code {
+  background-color: var(--color-neutral-darker);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: var(--color-primary);
 }
 </style>

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import markdownit from 'markdown-it'
 import { ref } from 'vue'
-import hljs from 'highlight.js' // https://highlightjs.org
-import 'highlight.js/styles/github-dark-dimmed.min.css'
+import anchor from 'markdown-it-anchor'
 
 const props = defineProps<{
   markdown: string
@@ -10,18 +9,7 @@ const props = defineProps<{
 
 const md = markdownit({
   linkify: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(str, { language: lang }).value
-      } catch {
-        console.error(`Error highlighting code block with language: ${lang}`)
-      }
-    }
-
-    return '' // use external default escaping
-  },
-})
+}).use(anchor)
 
 const content = ref(md.render(props.markdown))
 </script>
@@ -39,10 +27,7 @@ const content = ref(md.render(props.markdown))
     margin-bottom: var(--spacing-4);
   }
 
-  h2 {
-    margin-bottom: var(--spacing-3);
-  }
-
+  h2,
   h3,
   h4,
   h5,
@@ -50,8 +35,6 @@ const content = ref(md.render(props.markdown))
     margin-bottom: var(--spacing-2);
   }
 
-  ul,
-  ol,
   p {
     margin-bottom: var(--spacing-2);
   }
@@ -66,7 +49,7 @@ const content = ref(md.render(props.markdown))
   }
 
   code {
-    background-color: var(--color-neutral-darker);
+    background-color: var(--color-neutral-dark);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
   }
