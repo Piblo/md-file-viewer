@@ -10,7 +10,9 @@ const files = useFileStore()
 
 <template>
   <nav class="container">
-    <h1 class="nav-item nav-title"><code>.md</code> File Viewer</h1>
+    <header>
+      <h1 class="nav-item nav-title"><code>.md</code> File Viewer</h1>
+    </header>
     <NavLink to="/" class="nav-item">
       <FileUpIcon width="1rem" height="1rem" class="icon" /> Upload file
     </NavLink>

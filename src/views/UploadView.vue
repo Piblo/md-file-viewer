@@ -16,14 +16,14 @@ async function onFileSelected(file: File) {
 </script>
 
 <template>
-  <div class="container">
+  <main class="container">
     <DropZone @file-selected="onFileSelected" class="dropzone-container">
       <div class="info-container">
         <InfoIcon width="1rem" height="1rem" />
         <p>Uploaded files are kept in local storage</p>
       </div>
     </DropZone>
-  </div>
+  </main>
 </template>
 
 <style scoped>
