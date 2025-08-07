@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import Nav from './components/Nav.vue'
+import { Analytics } from '@vercel/analytics/vue'
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import Nav from './components/Nav.vue'
       <RouterView />
     </div>
   </div>
+  <Analytics />
 </template>
 
 <style scoped>
