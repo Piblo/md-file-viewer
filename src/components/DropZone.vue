@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Button from './Button.vue'
-import { FileUp } from 'lucide-vue-next'
+import { FileUp, CircleXIcon } from 'lucide-vue-next'
 
 const emit = defineEmits<{
   fileSelected: [file: File]
@@ -9,6 +9,7 @@ const emit = defineEmits<{
 
 const inputRef = ref<HTMLInputElement>()
 const isDraggingOver = ref(false)
+const errorMessage = ref('')
 
 function onClick() {
   inputRef.value?.click()
@@ -18,6 +19,11 @@ function onFileDrop(event: DragEvent) {
   isDraggingOver.value = false
   const file = event.dataTransfer?.files.item(0)
   if (!file) return
+
+  if (!file.name.endsWith('.md')) {
+    errorMessage.value = 'Only .md files are allowed'
+    return
+  }
 
   emit('fileSelected', file)
 }
@@ -38,16 +44,17 @@ function onFileChange(event: Event) {
     <div
       class="dropzone"
       :class="[{ dragOver: isDraggingOver }]"
-      v-on:dragover.prevent="() => (isDraggingOver = true)"
-      v-on:dragleave="() => (isDraggingOver = false)"
-      v-on:drop.prevent="onFileDrop"
+      @dragover.prevent="isDraggingOver = true"
+      @dragleave="isDraggingOver = false"
+      @drop.prevent="onFileDrop"
     >
       <FileUp class="icon" />
       <span
         >Drop your file here,
         <Button variant="link" @click="onClick">or click to browse</Button></span
       >
-      <slot />
+      <div class="error" v-if="errorMessage"><CircleXIcon width="1rem" /> {{ errorMessage }}</div>
+      <slot v-else />
     </div>
     <input ref="inputRef" hidden type="file" accept=".md" @change="onFileChange" />
   </div>
@@ -78,5 +85,13 @@ function onFileChange(event: Event) {
   width: 80px;
   height: 80px;
   margin-bottom: var(--spacing-4);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  color: var(--color-primary-dark);
+  margin-top: var(--spacing-2);
+  gap: var(--spacing-1);
 }
 </style>
