@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import Nav from './components/Nav.vue'
 import { Analytics } from '@vercel/analytics/vue'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import { Analytics } from '@vercel/analytics/vue'
     </div>
   </div>
   <Analytics />
+  <SpeedInsights />
 </template>
 
 <style scoped>
